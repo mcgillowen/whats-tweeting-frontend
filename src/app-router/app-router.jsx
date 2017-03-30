@@ -6,7 +6,7 @@ import isLoggedIn from './authorisation.js';
 class AppRouter extends Component {
 
   checkAuthorized(nextState, replace) {
-    (!isLoggedIn()) {
+    if ( !isLoggedIn() ) {
       replace({pathname: '/login'});
     }
   }
@@ -17,7 +17,7 @@ class AppRouter extends Component {
         <Route path='/'>
           <IndexRoute component={Home} />
           <Route path='/login' component={Login} />
-          <Route path='/app' onEnter={}>
+          <Route path='/app' onEnter={this.checkAuthorized}>
             <Route path='/profile/:id'>
               <IndexRoute component={Profile} />
               <Route path='/update-info' component={UpdateProfile} />

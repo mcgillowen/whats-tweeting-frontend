@@ -16,8 +16,7 @@ class AppRouter extends Component {
       <Router history={browserHistory} >
         <Route path='/'>
           <IndexRoute component={Home} />
-          <Route path='/login' component={Login} />
-          <Route path='/app' onEnter={this.checkAuthorized}>
+          <Route path='app' onEnter={this.checkAuthorized}>
             <Route path='/profile/:id'>
               <IndexRoute component={Profile} />
               <Route path='/update-info' component={UpdateProfile} />
@@ -31,6 +30,7 @@ class AppRouter extends Component {
             </Route>
           </Route>
         </Route>
+        <Route path='/login' component={Login} />
       </Router>
     );
   }

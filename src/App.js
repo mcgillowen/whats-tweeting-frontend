@@ -5,13 +5,13 @@ class App extends Component {
       return (
          <div id="pond">
 			<div>
-				<img src={'images/logo.png'} className="img-responsive"/>
+				<img alt="" src={'images/logo.png'} />
 			</div>
 			<form id="form" name="form" action="#" method="post">
 				<div id="block">
-					<label id="user" for="name">u</label>
+					<label id="user" htmlFor="name">u</label>
 					<input type="text" name="name" id="name" placeholder="Username" required/>
-					<label id="pass" for="password">p</label>
+					<label id="pass" htmlFor="password">p</label>
 					<input type="password" name="password" id="password" placeholder="Password" required />
 					<input type="submit" id="submit" name="submit" value="a"/>
 				</div>

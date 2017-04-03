@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import isLoggedIn from './authorisation.js';
 
+import Home from '../containers/Home/Home.jsx';
+import Login from '../containers/Login/Login.jsx';
+
 
 class AppRouter extends Component {
 
@@ -13,23 +16,8 @@ class AppRouter extends Component {
 
   render() {
     return (
-      <Router history={browserHistory} >
-        <Route path='/'>
-          <IndexRoute component={Home} />
-          <Route path='app' onEnter={this.checkAuthorized}>
-            <Route path='/profile/:id'>
-              <IndexRoute component={Profile} />
-              <Route path='/update-info' component={UpdateProfile} />
-              <Route path='/word-clouds' component={WordcloudsProfile} />
-            </Route>
-            <Route path='/word-clouds'>
-              <IndexRoute component={Wordclouds} />
-              <Route path='/search' component={WordcloudsSearch} />
-              <Route path='/:id' component={WordcloudsDisplay} />
-              <Route path='/generate' component={WordcloudsGenerate} />
-            </Route>
-          </Route>
-        </Route>
+      <Router history={browserHistory}>
+        <Route path='/' component={Home} />
         <Route path='/login' component={Login} />
       </Router>
     );

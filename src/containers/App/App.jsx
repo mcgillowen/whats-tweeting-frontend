@@ -1,7 +1,19 @@
 import React, {Component} from 'react';
-import './Menu.css';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import './App.css';
 
-export default class Menu extends Component {
+import Home from '../Home/Home.jsx';
+import Login from '../Login/Login.jsx';
+
+export default class App extends Component {
+
+  state = {
+    authenticated: true
+  }
+
+  changeAuth = (e) => {
+    this.setState({authenticated: !this.state.authenticated});
+  };
 
   render() {
     return (
@@ -28,11 +40,17 @@ export default class Menu extends Component {
             <li> <a href="#">Help</a></li>
             <li> <a href="#">Log Out</a></li>
           </ul>
+          <button onClick={this.changeAuth}>Click me</button>
         </div>
 
-        <div id="container">
-          {this.props.children}
-        </div>
+        <Router>
+          <div id="container">
+            <Route exact path='/' render={(match) => {
+              return this.state.authenticated ? (<Home/>) : (<Redirect to='/login'/>)
+            }}/>
+            <Route path='/login' component={Login}/>
+          </div>
+        </Router>
       </div>
     );
   }

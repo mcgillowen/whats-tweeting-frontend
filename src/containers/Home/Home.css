@@ -1,68 +1,9 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway');
+/*@import url('https://fonts.googleapis.com/css?family=Raleway');
 
 body{
 	background:#e9e9e9;
 	font-family: 'Raleway', sans-serif;
 }
-/*
-	Start of css if there is an user logged in
-*/
-#logged-in-pond {
-	text-align: left;
-	position: relative;
-}
-
-/* navigation menu */
-#menu {
-	overflow: hidden;
-	position:absolute;
-	left: 0px;
-	z-index:2;
-	padding:0;
-	margin:0;
-	min-width:450px;
-}
-.parent-menu {
-	background-color: #88BBD6;
-	float:left;
-	min-width:250px;
-}
-#menu ul {
-	list-style-type:none;
-	padding:0;
-	margin:0;
-}
-#menu ul li a {
-	padding:10px 15px;
-	display:block;
-	color:#fff;
-	text-decoration:none;
-	margin:0;
-	}
-#menu ul li a:hover {
-	background-color:#CDCDCD;
-	}
-#menu ul li:hover > ul {
-	left: 250px;
-	top: 254px;
-	-webkit-transition: left 200ms ease-in;
-	-moz-transition: left 200ms ease-in;
-	transition: left 200ms ease-in;
-	}
-#menu ul li > ul {
-	position: absolute;
-	background-color: #347598;
-	top: 254px;
-	left: -200px;
-	min-width: 200px;
-	z-index: -1; height: 100%;
-	-webkit-transition: left 200ms ease-in;
-	-moz-transition: left 200ms ease-in;
-	transition: left 200ms ease-in;
-	}
-#menu ul li > ul li a:hover {
-	background-color:#CDCDCD;
-	}
 
 #container {
 	position: absolute;
@@ -71,3 +12,4 @@ body{
 	display: inline-block;
 	min-width: 100px
 }
+*/

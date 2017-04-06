@@ -1,0 +1,13 @@
+.word-clouds-search {
+  padding: 10%;
+  display: flex;
+  flex-direction: column;
+}
+
+.word-clouds-search h1 {
+  flex: 1;
+}
+
+.word-clouds-search .search {
+  flex: 1;
+}

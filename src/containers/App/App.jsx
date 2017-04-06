@@ -4,7 +4,10 @@ import { BrowserRouter as Router, Route, Redirect, Link } from 'react-router-dom
 import Home from '../Home/Home.jsx';
 import Login from '../Login/Login.jsx';
 import WordCloudsGenerate from '../WordCloudsGenerate/WordCloudsGenerate.jsx';
+import WordCloudsSearch from '../WordCloudsSearch/WordCloudsSearch.jsx';
 import ProfileClouds from '../ProfileClouds/ProfileClouds.jsx';
+
+import './App.css';
 
 export default class App extends Component {
 
@@ -29,7 +32,7 @@ export default class App extends Component {
 						<ul className="parent-menu">
 							<li> <a href="#">Word Clouds</a>
 								<ul>
-								  <li><a href="#" id="WordcloudsSearch">Search</a></li>
+                  <li><Link to={`/searchWordClouds/${this.state.id}`}>Search</Link></li>
 								  <li><Link to={`/generateWordClouds/${this.state.id}`}>Generate</Link></li>
 								</ul>
 							</li>
@@ -42,8 +45,6 @@ export default class App extends Component {
 							<li><a href="#">Help</a></li>
 							<li><Link to={`/logout`}>Log Out</Link></li>
 						</ul>
-							
-						<button onClick={this.changeAuth}>Click me</button>
 					</div>
 
 					<div id="container">
@@ -52,6 +53,7 @@ export default class App extends Component {
 						}}/>
 						<Route path='/login' component={Login}/>
 						<Route path='/generateWordClouds/:id' component={WordCloudsGenerate} />
+            <Route path='/searchWordClouds/:id' component={WordCloudsSearch} />
 						<Route path='/profile/:id' component={ProfileClouds} />
 						<Route exact path='/logout' render={() => {
 						  return <Redirect to='/login'/>

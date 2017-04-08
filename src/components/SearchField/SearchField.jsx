@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 
+
 export default class SearchField extends Component {
 
   state = {
@@ -12,7 +13,7 @@ export default class SearchField extends Component {
 
   render () {
     return (
-      <div className='search-field'>
+      <div className='search-field' style={wrapperStyle}>
         <input
           type="text"
           value={this.state.value}

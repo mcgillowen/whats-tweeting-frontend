@@ -1,29 +1,19 @@
 import React, {Component} from 'react';
+import Slider from 'rc-slider';
+
+require('rc-slider/assets/index.css');
+
+const createSliderWithTooltip = Slider.createSliderWithTooltip;
+const Slider2 = createSliderWithTooltip(Slider);
+
+const wrapperStyle = {width: 400, margin: 20};
 
 export default class SearchSlider extends Component {
-
-  state = {
-    value: 200
-  }
-
-  handleChange = (e) => {
-    this.setState({value: e.target.value});
-    console.log(e.target.value);
-  }
-
   render() {
-    return (
-      <div className='search-slider'>
-        <input
-          type='range'
-          name='slider'
-          value={this.state.value}
-          min='200'
-          step='200'
-          max='3200'
-          onChange={this.handleChange}
-        />
-      </div>
-    );
-  }
+	  return(
+			<div style={wrapperStyle}>
+				<Slider2 dots step={200} defaultValue={400} max={3200} />
+			</div>
+		);
+	}
 }

@@ -1,0 +1,13 @@
+.wcGenerate {
+	position: relative;
+	z-index: 2;
+}
+
+.wcGenerate-user, .wcGenerate-scope {
+	display: flex;
+	min-width: 275px;
+}
+
+.wcGenerate-user p, .wcGenerate-scope p {
+	padding: 0 5px;
+}

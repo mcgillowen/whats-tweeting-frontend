@@ -39,14 +39,14 @@ export default class App extends Component {
 						<ul className="parent-menu">
 							<li> <a href="#">Word Clouds</a>
 								<ul>
-                  <li><Link to={`/searchWordClouds/${this.state.id}`}>Search</Link></li>
-								  <li><Link to={`/generateWordClouds/${this.state.id}`}>Generate</Link></li>
+									<li><Link to={`/searchWordClouds/${this.state.id}`}>Search</Link></li>
+									<li><Link to={`/generateWordClouds/${this.state.id}`}>Generate</Link></li>
 								</ul>
 							</li>
 							<li><a href="#">About</a></li>
 							<li><a>My Profile</a>
 								<ul>
-								  <li><Link to={`/profile/${this.state.id}`}>View Saved</Link></li>
+									<li><Link to={`/profile/${this.state.id}`}>View Saved</Link></li>
 								</ul>
 							</li>
 							<li><a href="#">Help</a></li>
@@ -59,11 +59,11 @@ export default class App extends Component {
 						  return this.authenticated(props) ? (<Home/>) : (<Redirect to='/login'/>)
 						}}/>
 						<Route path='/login' component={Login}/>
+						<Route path='/searchWordClouds/:id' component={WordCloudsSearch} />
 						<Route path='/generateWordClouds/:id' component={WordCloudsGenerate} />
-            <Route path='/searchWordClouds/:id' component={WordCloudsSearch} />
 						<Route path='/profile/:id' component={ProfileClouds} />
 						<Route exact path='/logout' render={() => {
-						  return <Redirect to='/login'/>
+							return <Redirect to='/login'/>
 						}}/>
 					</div>
 				</div>

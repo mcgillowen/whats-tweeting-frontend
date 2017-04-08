@@ -20,6 +20,13 @@ export default class App extends Component {
 		this.setState({authenticated: !this.state.authenticated});
 	};
 
+  authenticated = (props) => {
+    console.log(props);
+    const token = props.location.search.slice(5);
+    console.log(token);
+    return false;
+  };
+
 	render() {
 		return (
 			<Router>
@@ -48,8 +55,8 @@ export default class App extends Component {
 					</div>
 
 					<div id="container">
-						<Route exact path='/' render={(match) => {
-						  return this.state.authenticated ? (<Home/>) : (<Redirect to='/login'/>)
+						<Route exact path='/' render={(props) => {
+						  return this.authenticated(props) ? (<Home/>) : (<Redirect to='/login'/>)
 						}}/>
 						<Route path='/login' component={Login}/>
 						<Route path='/generateWordClouds/:id' component={WordCloudsGenerate} />

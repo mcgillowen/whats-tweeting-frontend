@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 
+const wrapperStyle = {margin: 10};
 
 export default class SearchField extends Component {
 

@@ -10,14 +10,29 @@ const Slider2 = createSliderWithTooltip(Slider);
 const wrapperStyle = {width: 400, margin: 20};
 
 export default class SearchSlider extends Component {
-  render() {
-	  return(
+	constructor(props) {
+		super(props);
+		this.state = {
+			value: ''
+		};
+		
+		this.handleChange = this.handleChange.bind(this);
+	}
+	
+	handleChange(value) {
+		console.log(`${value}`);
+		this.setState({value: event.targetvalue});
+	}
+  
+	render() {
+		return(
 			<div style={wrapperStyle}>
 				<Slider2 
 					dots 
 					step={200} 
 					defaultValue={400} 
 					max={3200} 
+					onChange={this.handleChange}
 				/>
 			</div>
 		);

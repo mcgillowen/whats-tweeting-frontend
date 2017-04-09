@@ -1,0 +1,11 @@
+.rc-slider-dot {
+	border-color: #CDCDCD !important;
+}
+
+.rc-slider-dot-active {
+	border-color: #abe2fb !important;
+}
+
+.rc-slider-rail {
+	background-color: #CDCDCD !important;
+}

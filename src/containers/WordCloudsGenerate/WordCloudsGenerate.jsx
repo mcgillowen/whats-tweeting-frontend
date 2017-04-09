@@ -14,12 +14,12 @@ export default class WordCloudsGenerate extends Component {
 				
 				<div className='wcGenerate-user'>
 					<p>Twitter User</p>
-					<p><Search /></p>
+					<Search />
 				</div>
 				
 				<div className='wcGenerate-scope'>
 					<p>Time Scope</p>
-					<p><SearchSlider /></p>
+					<SearchSlider />
 				</div>
 				
 				<button>

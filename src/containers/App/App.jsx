@@ -13,8 +13,8 @@ import './App.css';
 export default class App extends Component {
 
 	state = {
-		authenticated: false,
-		id: -1
+		authenticated: true,
+		id: 271179985
 	}
 
   constructor(props) {

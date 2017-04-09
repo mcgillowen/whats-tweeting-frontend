@@ -10,17 +10,14 @@ const Slider2 = createSliderWithTooltip(Slider);
 const wrapperStyle = {width: 400, margin: 20};
 
 export default class SearchSlider extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			value: ''
-		};
 
-		this.handleChange = this.handleChange.bind(this);
-	}
+	state = {
+		value: ''
+	};
 
-	handleChange(event) {
-		this.setState({value: event.target.value});
+	handleChange = (value) => {
+		this.setState({value: value});
+		this.props.cb(value);
 	}
 
 	render() {

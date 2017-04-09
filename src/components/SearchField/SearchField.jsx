@@ -10,6 +10,7 @@ export default class SearchField extends Component {
 
   handleChange = (e) => {
     this.setState({ value: e.target.value });
+    this.props.cb(e.target.value);
   }
 
   render () {
@@ -21,7 +22,6 @@ export default class SearchField extends Component {
           placeholder='Search'
           name='search-input'
           onChange={this.handleChange}
-          onKeyPress={this.handleKeyEvent}
           autoFocus
         />
       </div>

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { BrowserRouter as Router, Route, Redirect, Link } from 'react-router-dom';
+import jwt from 'jwt-decode';
 
 import Home from '../Home/Home.jsx';
 import Login from '../Login/Login.jsx';
@@ -12,19 +13,35 @@ import './App.css';
 export default class App extends Component {
 
 	state = {
-		authenticated: true,
-		id: 1
+		authenticated: false,
+		id: -1
 	}
+
+  constructor(props) {
+    super(props);
+    if (window.location.search !== ""){
+      const token = window.location.search.slice(5);
+      console.log(token);
+      const payload = jwt(token);
+      console.log(payload);
+      const id = payload.id;
+      window.location.search = "";
+      this.state = {id: id, authenticated: true};
+    }
+  }
 
 	changeAuth = (e) => {
 		this.setState({authenticated: !this.state.authenticated});
 	};
 
-  authenticated = (props) => {
-    console.log(props);
+  Authenticate = (props) => {
     const token = props.location.search.slice(5);
     console.log(token);
-    return false;
+    const payload = jwt(token);
+    console.log(payload);
+    const id = payload.id;
+    this.setState({id: id, authenticated: true});
+    //return <Redirect to='/' />
   };
 
 	render() {
@@ -56,12 +73,15 @@ export default class App extends Component {
 
 					<div id="container">
 						<Route exact path='/' render={(props) => {
-						  return this.authenticated(props) ? (<Home/>) : (<Redirect to='/login'/>)
+              //this.Authenticate(props);
+              //<Redirect to='/login'/>
+						  return this.state.authenticated ? (<Home/>) : (<Redirect to='/login'/>)
 						}}/>
 						<Route path='/login' component={Login}/>
 						<Route path='/searchWordClouds/:id' component={WordCloudsSearch} />
 						<Route path='/generateWordClouds/:id' component={WordCloudsGenerate} />
 						<Route path='/profile/:id' component={ProfileClouds} />
+            <Route strict path='/?jwt=:token' render={this.Authenticate} />
 						<Route exact path='/logout' render={() => {
 							return <Redirect to='/login'/>
 						}}/>

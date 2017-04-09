@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Slider from 'rc-slider';
+import './SearchSlider.css';
 
 require('rc-slider/assets/index.css');
 
@@ -12,7 +13,12 @@ export default class SearchSlider extends Component {
   render() {
 	  return(
 			<div style={wrapperStyle}>
-				<Slider2 dots step={200} defaultValue={400} max={3200} />
+				<Slider2 
+					dots 
+					step={200} 
+					defaultValue={400} 
+					max={3200} 
+				/>
 			</div>
 		);
 	}

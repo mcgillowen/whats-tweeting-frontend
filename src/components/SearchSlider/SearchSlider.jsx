@@ -15,23 +15,22 @@ export default class SearchSlider extends Component {
 		this.state = {
 			value: ''
 		};
-		
+
 		this.handleChange = this.handleChange.bind(this);
 	}
-	
-	handleChange(value) {
-		console.log(`${value}`);
-		this.setState({value: event.targetvalue});
+
+	handleChange(event) {
+		this.setState({value: event.target.value});
 	}
-  
+
 	render() {
 		return(
 			<div style={wrapperStyle}>
-				<Slider2 
-					dots 
-					step={200} 
-					defaultValue={400} 
-					max={3200} 
+				<Slider2
+					dots
+					step={200}
+					defaultValue={400}
+					max={3200}
 					onChange={this.handleChange}
 				/>
 			</div>

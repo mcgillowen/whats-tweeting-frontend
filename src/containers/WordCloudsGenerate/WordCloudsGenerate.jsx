@@ -9,7 +9,8 @@ export default class WordCloudsGenerate extends Component {
 	state = {
 		twitter_handle: '',
 		time_scope: 400,
-		result: null
+		result: null,
+		displayResults: false
 	}
 
 	updateTwitterHandle = (value) => {
@@ -21,7 +22,6 @@ export default class WordCloudsGenerate extends Component {
 	}
 
 	generateWordCloud = (e) => {
-		console.log(this.state);
 		const userID = this.props.match.params.id;
 		const numTweets = this.state.time_scope;
 		const twitterHandle = this.state.twitter_handle;
@@ -40,6 +40,7 @@ export default class WordCloudsGenerate extends Component {
 	    })
     };
 
+		this.setState({displayResults: true, result: null});
     fetch(url, request)
       .then(resp => {
         //console.log(resp);
@@ -54,14 +55,13 @@ export default class WordCloudsGenerate extends Component {
       .catch(err => {
         console.error(err);
       });
-
-
 	}
 
 	render() {
 
 		let results = null;
-		if (this.state.result) {
+		if (this.state.displayResults) {
+			console.log(this.state.result);
 			results = <GenerationResult data={this.state.result} />;
 		} else {
 			results = <div className='results'></div>;

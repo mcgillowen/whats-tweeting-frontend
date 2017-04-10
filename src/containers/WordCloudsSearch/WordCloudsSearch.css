@@ -2,3 +2,12 @@
 	position: relative;
 	z-index: 2;
 }
+
+.search {
+	display: flex;
+	min-width: 275px;
+}
+
+.search p {
+	padding: 0 5px;
+}

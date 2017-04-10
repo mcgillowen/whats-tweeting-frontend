@@ -35,8 +35,9 @@ export default class WordCloudsSearch extends Component {
     return (
       <div>
         <div className='word-clouds-search'>
-          <h1>Search for Word Clouds</h1>
+          <h1>Search Archives</h1>
           <div className='search'>
+			<p>Twitter User</p>
             <Search cb={this.searchCallback} />
           </div>
         </div>

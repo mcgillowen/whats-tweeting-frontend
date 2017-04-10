@@ -3,6 +3,11 @@
 	z-index: 2;
 }
 
+.wcGenerate-go {
+	display: flex;
+	justify-content: center;
+}
+
 .wcGenerate-user, .wcGenerate-scope {
 	display: flex;
 	min-width: 275px;

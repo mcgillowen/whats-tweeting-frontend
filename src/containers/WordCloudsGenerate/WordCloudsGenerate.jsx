@@ -68,24 +68,30 @@ export default class WordCloudsGenerate extends Component {
 		}
 
 		return (
-			<div className='wcGenerate'>
+			<div>
 				<div className='wcGenerate-header'>
 					<h1>Generate New Word Cloud</h1>
 				</div>
 
 				<div className='wcGenerate-user'>
 					<p>Twitter User</p>
-					<Search cb={this.updateTwitterHandle}/>
+					<div className='wcGenerate'>
+						<Search cb={this.updateTwitterHandle}/>
+					</div>
 				</div>
 
 				<div className='wcGenerate-scope'>
 					<p>Time Scope</p>
-					<SearchSlider cb={this.updateTimeScope}/>
+					<div className='wcGenerate'>
+						<SearchSlider cb={this.updateTimeScope}/>
+					</div>
 				</div>
-
-				<button onClick={this.generateWordCloud}>
-					Go
-				</button>
+	
+				<div className='wcGenerate-go'>
+					<button onClick={this.generateWordCloud}>
+						Go
+					</button>
+				</div>
 
 				{results}
 			</div>

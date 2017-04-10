@@ -22,7 +22,6 @@ export default class SearchField extends Component {
           placeholder='Search'
           name='search-input'
           onChange={this.handleChange}
-          autoFocus
         />
       </div>
     );

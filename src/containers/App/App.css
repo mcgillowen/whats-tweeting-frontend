@@ -11,62 +11,77 @@ body{
 }
 
 #container {
-	position: absolute;
-	left: 255px;
-	top: 50px;
-	min-width: 250px;
-	margin-left: 5%;
+	float: left;
+	width: 70%;
 }
 
-/* navigation menu */
-#menu { 
-	overflow: hidden;
-	position:absolute;
-	left: 0px;
-	z-index:1;
-	padding:0;
-	margin:0;
-	min-width:450px;
-} 
-.parent-menu {
-	background-color: #88BBD6;
+/* 
+	Navigation menu inspired by: https://codepen.io/Frecosse/pen/Akwdo?editors=1100
+*/
+#menu {
 	float:left;
-	min-width:250px;
-} 
+	z-index: 1;
+}
+
 #menu ul {
-	list-style-type:none;
+	list-style:none;
+	margin:0; 
 	padding:0;
-	margin:0;
-} 
+	width:235px;
+}
+
 #menu ul li a {
-	padding:10px 15px;
+	text-decoration: none;
+}
+
+#menu ul li label {
+	background: #88BBD6;
+	color: #FFFFFF;
+}
+
+#menu ul li input[type='checkbox'] {
+	display: none;
+}
+
+#menu ul li label {
 	display:block;
-	color:#fff;
-	text-decoration:none;
+	padding:12px 5px;
+	width:235px;
+}
+
+#menu ul li label:hover {
+	background: #CDCDCD;
+}
+
+#menu ul li input[type='checkbox']:checked ~ label {
+	background: #347598;
+}
+
+#menu ul li input[type='checkbox']:checked ~ .sub-menu {
+	height: auto;
+	display:block;
+}
+
+#menu ul ul {
+	background:#FFFFFF;
 	margin:0;
-	} 
-#menu ul li a:hover {
+	padding:0;
+}
+
+#menu ul ul li a {
+	display:block;
+	padding:12px 5px;
+	color:#666666;
+	text-decoration:none;
+}
+
+#menu ul ul li a:hover {
 	background-color:#CDCDCD;
-	}
-#menu ul li:hover > ul {
-	left: 250px;
-	top: 254px;
-	-webkit-transition: left 200ms ease-in;
-	-moz-transition: left 200ms ease-in;
-	transition: left 200ms ease-in;
-	} 
-#menu ul li > ul {
-	position: absolute;
-	background-color: #347598;
-	top: 254px;
-	left: -200px;
-	min-width: 200px;
-	z-index: -1;
-	height: 100%;
-	-webkit-transition: left 200ms ease-in;
-	-moz-transition: left 200ms ease-in;
-	transition: left 200ms ease-in;
-	} 
-#menu ul li > ul li a:hover {
-	background-color:#CDCDCD;
-	}
+	color:#88BBD6;
+}
+
+#menu .sub-menu {
+	height: 0;
+	display: block;
+	overflow: hidden;
+}

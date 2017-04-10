@@ -1,4 +1,13 @@
-.word-clouds-search {
+.wcSearch {
 	position: relative;
 	z-index: 2;
+}
+
+.wcGenerate-user {
+	display: flex;
+	min-width: 275px;
+}
+
+.wcGenerate-user p {
+	padding: 0 5px;
 }

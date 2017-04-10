@@ -30,11 +30,11 @@ export default class WordCloudsGenerate extends Component {
     const request = {
       method: 'POST',
       crossDomain: true,
-      body: JSON.stringify({
+      body: {
         userID: userID,
 				numTweets: numTweets,
 				twitterHandle: twitterHandle
-      }),
+      },
       headers: new Headers({
 		    'Content-Type': 'text/plain'
 	    })

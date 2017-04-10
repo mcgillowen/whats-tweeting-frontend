@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 
 import Search from '../../components/SearchField/SearchField.jsx';
 
-import {serverURL} from '../../config.js';
+//import {serverURL} from '../../config.js';
 
 import './WordCloudsSearch.css';
 
@@ -18,28 +18,49 @@ export default class WordCloudsSearch extends Component {
 
   handleSearch = (e) => {
 
+    console.log("Starting search");
+
+    const url = 'https://whatstweeting.mybluemix.net/getcloudstwitter';
     const request = {
       method: 'POST',
+      crossDomain: true,
       body: JSON.stringify({
-        twitter_handle: this.state.searchHandle
-      })
+				twitterHandle: this.state.searchHandle
+      }),
+      headers: new Headers({
+		    'Content-Type': 'text/plain'
+	    })
     };
 
-    fetch(`${serverURL}/getcloudstwitter`, request).then(response => {
-      console.log(response.json());
-    });
+    fetch(url, request)
+      .then(resp => {
+        console.log(resp);
+        return resp.json();
+      }).then(data => {
+        console.log(data);
+      }).catch(err => {
+        console.error(err);
+      });
 
+    console.log("Finished searching");
   }
 
   render() {
     return (
-      <div>
-        <div className='word-clouds-search'>
+      <div className='wcSearch'>
+        <div className='wcSearch-header'>
           <h1>Search for Word Clouds</h1>
-          <div className='search'>
-            <Search cb={this.searchCallback} />
-          </div>
         </div>
+
+        <div className='wcSearch-user'>
+            <p>Twitter Handle</p>
+            <Search cb={this.searchCallback} />
+        </div>
+
+        <button onClick={this.handleSearch}>
+					Go
+				</button>
+
         <div className='search-results'>
           <h1>Search results</h1>
           <div className='results'>

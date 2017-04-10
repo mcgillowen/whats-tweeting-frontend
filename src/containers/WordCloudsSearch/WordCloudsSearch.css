@@ -2,12 +2,12 @@
 	position: relative;
 	z-index: 2;
 }
-
-.wcGenerate-user {
+.search {
 	display: flex;
 	min-width: 275px;
 }
 
-.wcGenerate-user p {
+
+.search p {
 	padding: 0 5px;
 }

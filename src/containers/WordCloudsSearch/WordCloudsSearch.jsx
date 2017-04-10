@@ -47,13 +47,11 @@ export default class WordCloudsSearch extends Component {
 
   render() {
     return (
-      <div className='wcSearch'>
-        <div className='wcSearch-header'>
-          <h1>Search for Word Clouds</h1>
-        </div>
-
-        <div className='wcSearch-user'>
-            <p>Twitter Handle</p>
+      <div>
+        <div className='word-clouds-search'>
+          <h1>Search Archives</h1>
+          <div className='search'>
+			<p>Twitter User</p>
             <Search cb={this.searchCallback} />
         </div>
 

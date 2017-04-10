@@ -52,36 +52,40 @@ export default class App extends Component {
 						<div>
 							<img alt="" src={'images/logo.png'} />
 						</div>
-
-						<ul className="parent-menu">
-							<li> <a href="#">Word Clouds</a>
-								<ul>
+						
+						<ul>
+							<li className="parent-menu">
+								<input type="checkbox" name="item" id="item1" />   
+								<label htmlFor="item1">Word Clouds</label>
+								<ul className="sub-menu">
 									<li><Link to={`/searchWordClouds/${this.state.id}`}>Search</Link></li>
 									<li><Link to={`/generateWordClouds/${this.state.id}`}>Generate</Link></li>
 								</ul>
 							</li>
-							<li><a href="#">About</a></li>
-							<li><a>My Profile</a>
-								<ul>
+							<li className="parent-menu">
+								<input type="checkbox" name="item" id="item2" />   
+								<label htmlFor="item2">My Profile</label>
+								<ul className="sub-menu">
 									<li><Link to={`/profile/${this.state.id}`}>View Saved</Link></li>
 								</ul>
 							</li>
-							<li><a href="#">Help</a></li>
-							<li><Link to={`/logout`}>Log Out</Link></li>
+							<li className="parent-menu">
+								<input type="checkbox" name="item" id="item3" />
+								<Link to={`/logout`}><label htmlFor="item3">Log Out</label></Link>
+							</li>
 						</ul>
+					
 					</div>
 
 					<div id="container">
 						<Route exact path='/' render={(props) => {
-              //this.Authenticate(props);
-              //<Redirect to='/login'/>
 						  return this.state.authenticated ? (<Home/>) : (<Redirect to='/login'/>)
 						}}/>
 						<Route path='/login' component={Login}/>
 						<Route path='/searchWordClouds/:id' component={WordCloudsSearch} />
 						<Route path='/generateWordClouds/:id' component={WordCloudsGenerate} />
 						<Route path='/profile/:id' component={ProfileClouds} />
-            <Route strict path='/?jwt=:token' render={this.Authenticate} />
+						<Route strict path='/?jwt=:token' render={this.Authenticate} />
 						<Route exact path='/logout' render={() => {
 							return <Redirect to='/login'/>
 						}}/>

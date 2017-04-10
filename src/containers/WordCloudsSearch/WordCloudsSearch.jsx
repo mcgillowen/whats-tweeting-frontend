@@ -51,18 +51,19 @@ export default class WordCloudsSearch extends Component {
         <div className='word-clouds-search'>
           <h1>Search Archives</h1>
           <div className='search'>
-			<p>Twitter User</p>
+			      <p>Twitter User</p>
             <Search cb={this.searchCallback} />
-        </div>
+          </div>
 
-        <button onClick={this.handleSearch}>
-					Go
-				</button>
+          <button onClick={this.handleSearch}>
+					  Go
+				  </button>
 
-        <div className='search-results'>
-          <h1>Search results</h1>
-          <div className='results'>
+          <div className='search-results'>
+            <h1>Search results</h1>
+            <div className='results'>
 
+            </div>
           </div>
         </div>
       </div>

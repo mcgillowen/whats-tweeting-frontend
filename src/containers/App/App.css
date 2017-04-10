@@ -54,7 +54,7 @@ body{
 }
 
 #menu ul li input[type='checkbox']:checked ~ label {
-	background: #347598;
+	background: #99D3DF;
 }
 
 #menu ul li input[type='checkbox']:checked ~ .sub-menu {
@@ -63,7 +63,7 @@ body{
 }
 
 #menu ul ul {
-	background:#FFFFFF;
+	background:#347598;
 	margin:0;
 	padding:0;
 }
@@ -71,7 +71,7 @@ body{
 #menu ul ul li a {
 	display:block;
 	padding:12px 5px;
-	color:#666666;
+	color:#FFFFFF;
 	text-decoration:none;
 }
 

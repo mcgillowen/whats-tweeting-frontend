@@ -26,19 +26,20 @@ export default class WordCloudsGenerate extends Component {
 		const numTweets = this.state.time_scope;
 		const twitterHandle = this.state.twitter_handle;
 
-		const url = 'https://whatstweeting.mybluemix.net/generateresults';
+		const url = 'http://whatstweeting.mybluemix.net/generateresults';
     const request = {
       method: 'POST',
-      crossDomain: true,
-      body: {
+      body: JSON.stringify({
         userID: userID,
 				numTweets: numTweets,
 				twitterHandle: twitterHandle
-      },
+      }),
       headers: new Headers({
-		    'Content-Type': 'text/plain'
+		    'Content-Type': 'application/json'
 	    })
     };
+
+		console.log(request);
 
 		this.setState({displayResults: true, result: null});
     fetch(url, request)
@@ -86,7 +87,7 @@ export default class WordCloudsGenerate extends Component {
 						<SearchSlider cb={this.updateTimeScope}/>
 					</div>
 				</div>
-	
+
 				<div className='wcGenerate-go'>
 					<button onClick={this.generateWordCloud}>
 						Go

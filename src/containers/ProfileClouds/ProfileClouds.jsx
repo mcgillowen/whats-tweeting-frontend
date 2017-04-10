@@ -16,15 +16,14 @@ export default class ProfileClouds extends Component {
 
   getClouds() {
 
-    const url = 'https://whatstweeting.mybluemix.net/getResultsUser';
+    const url = 'http://whatstweeting.mybluemix.net/getResultsUser';
     const request = {
       method: 'POST',
-      crossDomain: true,
       body: JSON.stringify({
         userID: this.state.userID
       }),
       headers: new Headers({
-		    'Content-Type': 'text/plain'
+		    'Content-Type': 'application/json'
 	    })
     };
 
@@ -53,9 +52,9 @@ export default class ProfileClouds extends Component {
         </div>
         <div>
           {this.state.clouds.map((cloud, index) => {
-            const cloudValue = JSON.parse(cloud);
+            //const cloudValue = JSON.parse(cloud);
             //console.log(cloudValue);
-            return <WordCloudCard key={index} path={cloudValue.resultsURL} username={cloudValue.twitterHandle} />
+            return <WordCloudCard key={index} path={cloud.resultsURL} />
           })}
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
 import Search from '../../components/SearchField/SearchField.jsx';
+import WordCloudCard from '../../components/WordCloudCard/WordCloudCard.jsx'
 
 //import {serverURL} from '../../config.js';
 
@@ -9,7 +10,8 @@ import './WordCloudsSearch.css';
 export default class WordCloudsSearch extends Component {
 
   state = {
-    searchHandle: ''
+    searchHandle: '',
+    results: null
   };
 
   searchCallback = (handle) => {
@@ -20,15 +22,14 @@ export default class WordCloudsSearch extends Component {
 
     console.log("Starting search");
 
-    const url = 'https://whatstweeting.mybluemix.net/getcloudstwitter';
+    const url = 'http://whatstweeting.mybluemix.net/getcloudstwitter';
     const request = {
       method: 'POST',
-      crossDomain: true,
       body: JSON.stringify({
 				twitterHandle: this.state.searchHandle
       }),
       headers: new Headers({
-		    'Content-Type': 'text/plain'
+		    'Content-Type': 'application/json'
 	    })
     };
 
@@ -38,6 +39,7 @@ export default class WordCloudsSearch extends Component {
         return resp.json();
       }).then(data => {
         console.log(data);
+        this.setState({results: data.urls});
       }).catch(err => {
         console.error(err);
       });
@@ -46,6 +48,14 @@ export default class WordCloudsSearch extends Component {
   }
 
   render() {
+
+    let result = <p>No results yet</p>;
+    if (this.state.results) {
+      result = this.state.results.map((url, index) => {
+        return (<WordCloudCard key={index} path={url} />);
+      });
+    }
+
     return (
       <div>
         <div className='word-clouds-search'>
@@ -62,7 +72,7 @@ export default class WordCloudsSearch extends Component {
           <div className='search-results'>
             <h1>Search results</h1>
             <div className='results'>
-
+              {result}
             </div>
           </div>
         </div>

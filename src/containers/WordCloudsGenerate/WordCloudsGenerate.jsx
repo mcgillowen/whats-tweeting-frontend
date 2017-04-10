@@ -87,11 +87,9 @@ export default class WordCloudsGenerate extends Component {
 					</div>
 				</div>
 	
-				<div className='wcGenerate-go'>
-					<button onClick={this.generateWordCloud}>
+				<button onClick={this.generateWordCloud}>
 						Go
-					</button>
-				</div>
+				</button>
 
 				{results}
 			</div>

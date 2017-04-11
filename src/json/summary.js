@@ -1,4 +1,4 @@
-{
+export default {
   "phrase": {
     "You are %s": "You are %s",
     "You are %s and %s": "You are %s and %s",

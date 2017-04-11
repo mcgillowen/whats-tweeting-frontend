@@ -1,4 +1,4 @@
-{
+export default {
   "Anxiety": {
     "type": "personality",
     "msg": "The 'fight-or-flight' system of the brain of anxious individuals is too easily and too often engaged. Therefore, people who score high in this area often feel like something unpleasant, threatening or dangerous is about to happen."

@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import ProfileText from '../../components/ProfileText/ProfileText.jsx';
+
 import Loading from '../../../public/images/loading.gif';
 
 export default class GenerationResult extends Component {
@@ -32,7 +34,11 @@ export default class GenerationResult extends Component {
     if (this.state.displayLoading) {
       display = <div className='results'><img src={Loading} alt='Loading'></img></div>;
     } else {
-      display = <div className='results' dangerouslySetInnerHTML={{__html: this.state.svg}}></div>;
+      display = (<div className='results'>
+                  <div dangerouslySetInnerHTML={{__html: this.state.svg}}></div>
+                  <ProfileText data={this.state.profile} />
+                </div>);
+
     }
 
     return (

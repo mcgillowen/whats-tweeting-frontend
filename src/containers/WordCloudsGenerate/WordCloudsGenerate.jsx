@@ -87,7 +87,7 @@ export default class WordCloudsGenerate extends Component {
 						<SearchSlider cb={this.updateTimeScope}/>
 					</div>
 				</div>
-				
+
 				<button onClick={this.generateWordCloud}>
 						Go
 				</button>

@@ -1,4 +1,4 @@
-{
+export default {
 	"Friendliness": {
 		"Big5": "Extraversion",
 		"LowTerm": "Reserved",

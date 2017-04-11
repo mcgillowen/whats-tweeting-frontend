@@ -14,12 +14,17 @@
  * limitations under the License.
  */
 
-'use strict';
 /* global format:false */
 /**
  * Provides a Text Summary for profiles.
  */
-var textSummary = (function (provider, translatorFactory) {
+
+import cData from './json/traits.js';
+import fData from './json/facets.js';
+import vData from './json/values.js';
+import nData from './json/needs.js';
+
+const textSummary = (function () {
 
   var self = {
       jsonPath : 'json'
@@ -31,41 +36,14 @@ var textSummary = (function (provider, translatorFactory) {
   self.valuesData = {};
   self.needsData = {};
 
-  // i18n
-  var tphrase = translatorFactory.createTranslator({}); // for phrases
-
   /**
    * Load summary data and translations.
    */
   self.loadSummaryData = function () {
-
-    console.log('Requesting summary translations');
-    provider.getJson(self.jsonPath, 'summary',
-      function(summaryTranslations) {
-        tphrase = translatorFactory.createTranslator(summaryTranslations['phrase']);
-      }
-    );
-
-    provider.getJson(self.jsonPath, 'traits',
-      function(response) {
-        self.circumplexData = response;
-      });
-
-    provider.getJson(self.jsonPath, 'facets',
-      function(response) {
-        self.facetsData = response;
-      });
-
-
-    provider.getJson(self.jsonPath, 'values',
-      function(response) {
-        self.valuesData = response;
-      });
-
-    provider.getJson(self.jsonPath, 'needs',
-      function(response) {
-        self.needsData = response;
-      });
+    self.circumplexData = cData;
+    self.facetsData = fData;
+    self.valuesData = vData;
+    self.needsData = nData;
   };
 
   function compareByRelevance(o1, o2) {
@@ -116,13 +94,13 @@ var textSummary = (function (provider, translatorFactory) {
       case 2:
         // Report 1 adjective.
         adj = getCircumplexAdjective(relevantBig5[0], relevantBig5[1], 0);
-        sentences.push(format(tphrase('You are %s'), adj) + '.');
+        sentences.push(`You are ${adj}.`);
         break;
       case 3:
         // Report 2 adjectives.
         adj1 = getCircumplexAdjective(relevantBig5[0], relevantBig5[1], 0);
         adj2 = getCircumplexAdjective(relevantBig5[1], relevantBig5[2], 1);
-        sentences.push(format(tphrase('You are %s and %s'),  adj1, adj2) + '.');
+        sentences.push(`You are ${adj1} and ${adj2}.`);
         break;
       case 4:
       case 5:
@@ -130,7 +108,9 @@ var textSummary = (function (provider, translatorFactory) {
         adj1 = getCircumplexAdjective(relevantBig5[0], relevantBig5[1], 0);
         adj2 = getCircumplexAdjective(relevantBig5[1], relevantBig5[2], 1);
         adj3 = getCircumplexAdjective(relevantBig5[2], relevantBig5[3], 2);
-        sentences.push(format(tphrase('You are %s, %s and %s'),  adj1, adj2, adj3) + '.');
+        sentences.push(`You are ${adj1}, ${adj2} and ${adj3}.`);
+        break;
+      default:
         break;
     }
 
@@ -156,9 +136,9 @@ var textSummary = (function (provider, translatorFactory) {
 
     // Assemble an adjective and description for the two most important facets.
     var info = getFacetInfo(facetElements[0]);
-    sentences.push(format(tphrase('You are %s'), info.term) + ': ' + info.description + '.');
+    sentences.push(`You are ${info.term}: ${info.description}.`);
     info = getFacetInfo(facetElements[1]);
-    sentences.push(format(tphrase('You are %s'), info.term) + ': ' + info.description + '.');
+    sentences.push(`You are ${info.term}: ${info.description}.`);
 
     // If all the facets correspond to the same feature, continue until a
     // different parent feature is found.
@@ -169,7 +149,7 @@ var textSummary = (function (provider, translatorFactory) {
       }
     }
     info = getFacetInfo(facetElements[i]);
-    sentences.push(format(tphrase('And you are %s'), info.term)+ ': ' + info.description + '.');
+    sentences.push(`And you are ${info.term}: ${info.description}.`);
 
     return sentences;
   }
@@ -204,48 +184,48 @@ var textSummary = (function (provider, translatorFactory) {
           term2 = info2.term;
       switch (intervalFor(valuesList[0].percentage)) {
         case 0:
-          sentence = format(tphrase('You are relatively unconcerned with both %s and %s'), term1, term2) + '.';
+          sentence = `You are relatively unconcerned with both ${term1} and ${term2}.`;
           break;
         case 1:
-          sentence = format(tphrase('You don\'t find either %s or %s to be particularly motivating for you'), term1, term2) + '.';
+          sentence = `You don't find either ${term1} or ${term2} to be particularly motivating for you.`;
           break;
         case 2:
-          sentence = format(tphrase('You value both %s and %s a bit'), term1, term2) + '.';
+          sentence = `You value both ${term1} and ${term2} a bit.`;
           break;
         case 3:
-          sentence = format(tphrase('You consider both %s and %s to guide a large part of what you do'), term1, term2) + '.';
+          sentence = `You consider both ${term1} and ${term2} to guide a large part of what you do.`;
+          break;
+        default:
           break;
       }
       sentences.push(sentence);
 
       // Assemble the final strings in the correct format.
       sentences.push(info1.description + '.');
-      sentences.push(format(tphrase('And %s'), info2.description.toLowerCase()) + '.');
+      sentences.push(`And ${info2.description.toLowerCase()}.`);
     } else {
       var valuesInfo = [info1, info2];
       for (var i = 0; i < valuesInfo.length; i++) {
         // Process it this way because the code is the same.
         switch (intervalFor(valuesList[i].percentage)) {
           case 0:
-            sentence = format(tphrase('You are relatively unconcerned with %s'),
-              valuesInfo[i].term);
+            sentence = `You are relatively unconcerned with ${valuesInfo[i].term}`;
             break;
           case 1:
-            sentence = format(tphrase('You don\'t find %s to be particularly motivating for you'),
-              valuesInfo[i].term);
+            sentence = `You don't find ${valuesInfo[i].term} to be particularly motivating for you`;
             break;
           case 2:
-            sentence = format(tphrase('You value %s a bit more'),
-              valuesInfo[i].term);
+            sentence = `You value ${valuesInfo[i].term} a bit more`;
             break;
           case 3:
-            sentence = format(tphrase('You consider %s to guide a large part of what you do'),
-              valuesInfo[i].term);
+            sentence = `You consider ${valuesInfo[i].term} to guide a large part of what you do`;
+            break;
+          default:
             break;
         }
-        sentence = sentence.concat(': ').
-            concat(valuesInfo[i].description.toLowerCase()).
-            concat('.');
+        sentence = sentence.concat(': ')
+          .concat(valuesInfo[i].description.toLowerCase())
+          .concat('.');
         sentences.push(sentence);
       }
     }
@@ -275,19 +255,20 @@ var textSummary = (function (provider, translatorFactory) {
     // Form the right sentence for the single need.
     switch (intervalFor(needsList[0].percentage)) {
       case 0:
-        sentence = tphrase('Experiences that make you feel high %s are generally unappealing to you');
+        sentence = `Experiences that make you feel high ${word} are generally unappealing to you.`;
         break;
       case 1:
-        sentence = tphrase('Experiences that give a sense of %s hold some appeal to you');
+        sentence = `Experiences that give a sense of ${word} hold some appeal to you.`;
         break;
       case 2:
-        sentence = tphrase('You are motivated to seek out experiences that provide a strong feeling of %s');
+        sentence = `You are motivated to seek out experiences that provide a strong feeling of ${word}.`;
         break;
       case 3:
-        sentence = tphrase('Your choices are driven by a desire for %s');
+        sentence = `Your choices are driven by a desire for ${word}.`;
         break;
+      default:
+          break;
     }
-    sentence = format(sentence, word).concat('.');
     sentences.push(sentence);
 
     return sentences;
@@ -302,30 +283,32 @@ var textSummary = (function (provider, translatorFactory) {
     });
 
     // Assemble the identifier as the JSON file stored it.
-    var identifier = ordered[0].id.
-    concat(ordered[0].percentage > 0.5 ? '_plus_' : '_minus_').
-    concat(ordered[1].id).
-    concat(ordered[1].percentage > 0.5 ? '_plus' : '_minus');
+    var identifier = ordered[0].id
+      .concat(ordered[0].percentage > 0.5 ? '_plus_' : '_minus_')
+      .concat(ordered[1].id)
+      .concat(ordered[1].percentage > 0.5 ? '_plus' : '_minus');
 
     var traitMult = self.circumplexData[identifier][0];
 
-    var sentence = '%s';
+    var sentence = `${traitMult.word}`;
 
     if (traitMult.perceived_negatively) {
       switch (order) {
         case 0:
-          sentence = tphrase('a bit %s');
+          sentence = `a bit ${traitMult.word}`;
           break;
         case 1:
-          sentence = tphrase('somewhat %s');
+          sentence = `somewhat ${traitMult.word}`;
           break;
         case 2:
-          sentence = tphrase('can be perceived as %s');
+          sentence = `can be perceived as ${traitMult.word}`;
+          break;
+        default:
           break;
       }
     }
 
-    return format(sentence, traitMult.word);
+    return sentence;
   }
 
   function getFacetInfo(f) {
@@ -395,11 +378,12 @@ var textSummary = (function (provider, translatorFactory) {
    * Initializes the TextSummary module.
    * @param jsonPath The path were json files are held.
    */
-  self.init = function (jsonPath) {
-    self.jsonPath = jsonPath || self.jsonPath;
+  self.init = function () {
     self.loadSummaryData();
   };
 
   return self;
 
-})(i18nProvider, i18nTranslatorFactory);
+})();
+
+export default textSummary;

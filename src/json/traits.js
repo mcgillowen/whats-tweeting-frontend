@@ -1,4 +1,4 @@
-{
+export default {
     "Agreeableness_minus_Conscientiousness_minus": [
         {
             "perceived_negatively": true,

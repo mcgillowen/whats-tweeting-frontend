@@ -1,4 +1,4 @@
-{
+export default {
     "Challenge": [
         "prestige",
         "competition",

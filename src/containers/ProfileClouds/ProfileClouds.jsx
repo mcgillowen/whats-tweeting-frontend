@@ -27,16 +27,17 @@ export default class ProfileClouds extends Component {
 	    })
     };
 
+    console.log(request);
     fetch(url, request)
       .then(resp => {
         //console.log(resp);
         return resp.json();
       })
       .then(data => {
-        //console.log(data);
+        console.log(data);
         const clouds = JSON.parse(JSON.stringify(data));
         //console.log(clouds);
-        this.setState({ clouds: clouds});
+        this.setState({clouds: clouds});
       })
       .catch(err => {
         console.error(err);
@@ -53,8 +54,8 @@ export default class ProfileClouds extends Component {
         <div>
           {this.state.clouds.map((cloud, index) => {
             //const cloudValue = JSON.parse(cloud);
-            //console.log(cloudValue);
-            return <WordCloudCard key={index} path={cloud.resultsURL} />
+            console.log(cloud);
+            return <WordCloudCard key={index} path={cloud.resultsURL} twitter={cloud.twitterHandle} />
           })}
         </div>
       </div>

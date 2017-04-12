@@ -48,7 +48,7 @@ export default class WordCloudsGenerate extends Component {
         return resp.json();
       })
       .then(data => {
-        //console.log(data);
+        console.log(data);
         const result = JSON.parse(JSON.stringify(data));
         //console.log(clouds);
 				this.setState({result: result});

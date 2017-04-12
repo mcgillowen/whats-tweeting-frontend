@@ -1,43 +1,49 @@
 import React, {Component} from 'react';
+import ProfileText from '../ProfileText/ProfileText.jsx';
 
 export default class WordCloudCard extends Component {
 
   state = {
-    url: '',
     svg: '',
-    profile: null
-  }
-
-  constructor(props) {
-    super(props);
-    const url = `${props.path}.json`;
-
-    this.state = {
-      url: url,
-      svg: '',
-      profile: null
-    }
-
+    profile: [],
+    display: false
   }
 
   componentDidMount() {
-
-    fetch(this.state.url, {method: 'GET'})
+    const url = `${this.props.path}.json`;
+    console.log(url);
+    fetch(url, {method: 'GET'})
       .then(resp => {
         return resp.json();
       }).then(data => {
         console.log(data);
-        this.setState({svg: data.wordcloud, profile: data.profile});
+        if (data.code === 404) {
+          this.setState({display: false});
+        } else {
+          this.setState({svg: data.wordcloud, profile: data.profile, display: true});
+        }
+      }).catch(err => {
+        this.setState({display: false});
       });
-
   }
 
 
   render() {
+
+    let element = null;
+    if (this.state.display) {
+      element = (<div className='word-cloud-card'>
+                    <h2>{this.props.twitter}</h2>
+                    <div dangerouslySetInnerHTML={{__html: this.state.svg}}></div>
+                    <ProfileText data={this.state.profile} />
+                </div>);
+    } else {
+      element = (<p style={{display: 'none'}}></p>);
+    }
+
     return (
-      <div className='word-cloud-card'>
-        <h2>{this.props.username}</h2>
-        <div dangerouslySetInnerHTML={{__html: this.state.svg}}></div>
+      <div>
+        {element}
       </div>
     );
   };

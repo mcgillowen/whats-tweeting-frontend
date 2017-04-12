@@ -38,7 +38,6 @@ export default class GenerationResult extends Component {
                   <div dangerouslySetInnerHTML={{__html: this.state.svg}}></div>
                   <ProfileText data={this.state.profile} />
                 </div>);
-
     }
 
     return (

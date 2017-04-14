@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import ProfileText from '../ProfileText/ProfileText.jsx';
 
 export default class WordCloudCard extends Component {
@@ -10,14 +9,9 @@ export default class WordCloudCard extends Component {
     display: false
   }
 
-  componentDidMount() {
-    const url = `${this.props.path}.json`;
-
-    const urlParts = url.split('/');
-    const id = urlParts[urlParts.length - 1].split('.')[0];
-    console.log(id);
-
-    this.setState({id: id});
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps);
+    const url = `${nextProps.path}.json`;
 
     console.log(url);
     fetch(url, {method: 'GET'})
@@ -40,11 +34,10 @@ export default class WordCloudCard extends Component {
 
     let element = null;
     if (this.state.display) {
-      element = (<Link to={`/wordcloud/${this.state.id}`}>
-                    <h2>{this.props.twitter}</h2>
+      element = (<div>
                     <div dangerouslySetInnerHTML={{__html: this.state.svg}}></div>
                     <ProfileText data={this.state.profile} />
-                </Link>);
+                </div>);
     } else {
       element = (<p style={{display: 'none'}}></p>);
     }

@@ -16,7 +16,7 @@ export default class Help extends Component {
 						In the field <strong>Twitter User</strong>, type in the Twitter account that you wish to search for existing Word Clouds. <em><font color="#ff0000">Please be aware that this is case sensitive.</font></em>
 					</li>
 					<li>
-						Select <strong>Go</strong> to generate your new Word Cloud.
+						Select <strong>Go</strong> to view Word Clouds saved in the archive for that specific Twitter account.
 					</li>
 				</ol>
 				<p>From here, you can <strong>Like</strong> Word Clouds, and discuss any existing Word Cloud.</p>

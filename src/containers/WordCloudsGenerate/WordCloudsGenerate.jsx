@@ -27,7 +27,8 @@ export default class WordCloudsGenerate extends Component {
 		const numTweets = this.state.time_scope;
 		const twitterHandle = this.state.twitter_handle;
 
-		const url = 'http://whatstweeting.mybluemix.net/generateresults';
+		const url = `${window.location.origin}/generateresults`;
+		//const url = 'http://whatstweeting.mybluemix.net/generateresults';
     const request = {
       method: 'POST',
       body: JSON.stringify({

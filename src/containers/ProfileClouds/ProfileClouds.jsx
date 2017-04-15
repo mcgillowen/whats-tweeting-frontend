@@ -15,8 +15,8 @@ export default class ProfileClouds extends Component {
   }
 
   getClouds() {
-
-    const url = 'http://whatstweeting.mybluemix.net/getResultsUser';
+    const url = `${window.location.origin}/getResultsUser`;
+    //const url = 'http://whatstweeting.mybluemix.net/getResultsUser';
     const request = {
       method: 'POST',
       body: JSON.stringify({

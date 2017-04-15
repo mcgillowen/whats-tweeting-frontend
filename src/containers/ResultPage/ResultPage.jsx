@@ -10,7 +10,8 @@ export default class ResultPage extends Component {
   }
 
   componentDidMount() {
-    const url = 'http://whatstweeting.mybluemix.net/getresults';
+    const url = `${window.location.origin}/getresults`;
+    //const url = 'http://whatstweeting.mybluemix.net/getresults';
     const request = {
       method: 'POST',
       body: JSON.stringify({

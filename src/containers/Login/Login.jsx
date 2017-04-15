@@ -4,8 +4,9 @@ import './Login.css';
 export default class Login extends Component {
 	handleClick = (e) => {
 		e.preventDefault();
-		console.log('The link was clicked. Time to deal with it.');
-		window.location.href='https://whatstweeting.mybluemix.net/request-token';
+		//console.log('The link was clicked. Time to deal with it.');
+		window.location.href = `${window.location.origin}/request-token`;
+		//window.location.href='https://whatstweeting.mybluemix.net/request-token';
 	};
 
   render() {

@@ -20,9 +20,10 @@ export default class WordCloudsSearch extends Component {
 
   handleSearch = (e) => {
 
-    console.log("Starting search");
+    //console.log("Starting search");
 
-    const url = 'http://whatstweeting.mybluemix.net/getcloudstwitter';
+    const url = `${window.location.origin}/getcloudstwitter`;
+    //const url = 'http://whatstweeting.mybluemix.net/getcloudstwitter';
     const request = {
       method: 'POST',
       body: JSON.stringify({

@@ -1,15 +1,4 @@
-/*@import url('https://fonts.googleapis.com/css?family=Raleway');
-
-body{
-	background:#e9e9e9;
-	font-family: 'Raleway', sans-serif;
+.home-image {
+	width: 50%;
+	height: auto;
 }
-
-#container {
-	position: absolute;
-	left: 255px;
-	top: 50px;
-	display: inline-block;
-	min-width: 100px
-}
-*/

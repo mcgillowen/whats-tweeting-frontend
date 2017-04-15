@@ -4,6 +4,7 @@ import jwt from 'jwt-decode';
 
 import Home from '../Home/Home.jsx';
 import Login from '../Login/Login.jsx';
+import Help from '../Help/Help.jsx';
 import WordCloudsGenerate from '../WordCloudsGenerate/WordCloudsGenerate.jsx';
 import WordCloudsSearch from '../WordCloudsSearch/WordCloudsSearch.jsx';
 import ProfileClouds from '../ProfileClouds/ProfileClouds.jsx';
@@ -69,9 +70,13 @@ export default class App extends Component {
                   <li><Link to={`/profile/${this.state.id}`}>View Saved</Link></li>
                 </ul>
               </li>
-              <li className="parent-menu">
+			  <li className="parent-menu">
                 <input type="checkbox" name="item" id="item3" />
-                {this.state.authenticated ? (<Link to={`/logout`}><label htmlFor="item3">Log Out</label></Link>) : (<Link to={`/login`}><label htmlFor="item3">Log In</label></Link>)}
+                <li><Link to={`/help`}><label htmlFor="item4">Help</label></Link></li>
+              </li>
+              <li className="parent-menu">
+                <input type="checkbox" name="item" id="item4" />
+                {this.state.authenticated ? (<Link to={`/logout`}><label htmlFor="item3">Log Out</label></Link>) : (<Link to={`/login`}><label htmlFor="item4">Log In</label></Link>)}
               </li>
             </ul>
 
@@ -92,7 +97,9 @@ export default class App extends Component {
             <Route path='/profile/:id' render={(props) => {
               return this.state.authenticated ? (<ProfileClouds {...props}/>) : (<Redirect to='/login'/>)
             }} />
-
+			<Route path='/help' render={() => {
+              return this.state.authenticated ? (<Help />) : (<Redirect to='/login'/> )
+            }} />
             <Route path='/wordcloud/:id' component={ResultPage} />
             <Route exact path='/logout' render={() => {
               this.logOut();

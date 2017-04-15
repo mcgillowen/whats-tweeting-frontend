@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import Disqus from 'react-disqus-comments';
+//import Disqus from 'react-disqus-comments';
+import ReactDisqusThread from 'react-disqus-thread';
 import WordCloudCard from '../../components/WordCloudCardNoLink/WordCloudCardNoLink.jsx';
 
 export default class ResultPage extends Component {
@@ -41,7 +42,7 @@ export default class ResultPage extends Component {
       <div>
         <WordCloudCard path={this.state.path} />
 
-        <Disqus
+        <ReactDisqusThread
           shortname="whats-tweeting-1"
           identifier={`${this.state.id}`}
           title="What's Tweeting?"

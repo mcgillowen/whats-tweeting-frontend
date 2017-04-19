@@ -16,7 +16,8 @@ export default class App extends Component {
 
   state = {
     authenticated: false,
-    id: -1
+    id: -1,
+    name: ''
   }
 
   constructor(props) {
@@ -28,20 +29,23 @@ export default class App extends Component {
       const payload = jwt(token);
       //console.log(payload);
       const id = payload.id;
+      const name = payload['screen_name'];
       window.history.pushState({id:id}, 'loggedIn', '/');
-      this.state = {id: id, authenticated: true};
+      this.state = {id: id, authenticated: true, name: name};
     } else if (!this.state.authenticated) {
       const token = window.localStorage.getItem('whats-tweeting-jwt');
       if (token) {
         const payload = jwt(token);
         const id = payload.id;
-        this.state = {id: id, authenticated: true};
+        const name = payload['screen_name'];
+        this.state = {id: id, authenticated: true, name: name};
       }
     }
   }
 
   logOut() {
-    this.setState({authenticated: false, id: -1});
+    window.localStorage.removeItem('whats-tweeting-jwt');
+    this.setState({authenticated: false, id: -1, name: ''});
   }
 
 
@@ -70,9 +74,9 @@ export default class App extends Component {
                   <li><Link to={`/profile/${this.state.id}`}>View Saved</Link></li>
                 </ul>
               </li>
-			  <li className="parent-menu">
+              <li className="parent-menu">
                 <input type="checkbox" name="item" id="item3" />
-                <li><Link to={`/help`}><label htmlFor="item4">Help</label></Link></li>
+                <Link to={`/help`}><label htmlFor="item4">Help</label></Link>
               </li>
               <li className="parent-menu">
                 <input type="checkbox" name="item" id="item4" />
@@ -95,9 +99,9 @@ export default class App extends Component {
               return this.state.authenticated ? (<WordCloudsGenerate {...props}/>) : (<Redirect to='/login'/>)
             }} />
             <Route path='/profile/:id' render={(props) => {
-              return this.state.authenticated ? (<ProfileClouds {...props}/>) : (<Redirect to='/login'/>)
+              return this.state.authenticated ? (<ProfileClouds {...props} name={this.state.name}/>) : (<Redirect to='/login'/>)
             }} />
-			<Route path='/help' render={() => {
+            <Route path='/help' render={() => {
               return this.state.authenticated ? (<Help />) : (<Redirect to='/login'/> )
             }} />
             <Route path='/wordcloud/:id' component={ResultPage} />

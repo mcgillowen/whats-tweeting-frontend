@@ -7,6 +7,7 @@ export default class ProfileClouds extends Component {
     super(props);
     this.state = {
       userID: props.match.params.id,
+      name: props.name,
       clouds: []
     };
 
@@ -49,7 +50,7 @@ export default class ProfileClouds extends Component {
     return (
       <div className='profile-view'>
         <div className='profile-header'>
-          <h1>{this.state.userID}</h1>
+          <h1>{this.state.name}</h1>
         </div>
         <div>
           {this.state.clouds.map((cloud, index) => {

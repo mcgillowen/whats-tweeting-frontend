@@ -40,11 +40,14 @@ export default class WordCloudCard extends Component {
 
     let element = null;
     if (this.state.display) {
-      element = (<Link to={`/wordcloud/${this.state.id}`}>
+      element = (<div>
+                  <Link to={`/wordcloud/${this.state.id}`}>
                     <h2>{this.props.twitter}</h2>
                     <div dangerouslySetInnerHTML={{__html: this.state.svg}}></div>
-                    <ProfileText data={this.state.profile} />
-                </Link>);
+                  </Link>
+                  <ProfileText data={this.state.profile} />
+                </div>
+                );
     } else {
       element = (<p style={{display: 'none'}}></p>);
     }
